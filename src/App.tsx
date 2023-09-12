@@ -36,7 +36,7 @@ export function App() {
     <ViewPort>
       <ResetCSS />
       <MainContainer>
-        <MainTitle>Seção de Comentários</MainTitle>
+        <MainTitle>Feed de Comentários</MainTitle>
         <form onSubmit={handleSubmit}>
           <LabelForm htmlFor="email">Email:</LabelForm>
           <input
