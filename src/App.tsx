@@ -1,23 +1,22 @@
-import { MainContainer } from "./assets/Styles";
 import { ResetCSS } from "./assets/GlobalStyles";
-import { ViewPort } from "./assets/Styles";
+import { ViewPort, MainContainer, CommentsDiv, CommentInfoDiv } from "./assets/Styles";
 import { LabelForm, Button } from "./assets/FormStyles";
 import { MainTitle, Paragraph } from "./assets/FontStyles";
+import Trash from "./assets/Imagens/icon-delete.svg";
 import { useState, FormEvent } from "react";
 
 interface IComment {
-  id: number,
-  mail: string,
-  comment: string,
-  date: Date
+  id: number;
+  mail: string;
+  comment: string;
+  date: Date;
 }
 
 export function App() {
-
   const [mail, setMail] = useState("");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<IComment[]>([]);
-  
+
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
 
@@ -31,6 +30,9 @@ export function App() {
     setMail("");
     setComment("");
   };
+  const handleDelete = (id: number) => {
+    setComments((currentComents)=> currentComents.filter((comment)=>comment.id !== id))
+  }
 
   return (
     <ViewPort>
@@ -61,11 +63,16 @@ export function App() {
         <hr />
         {comments.length > 0 ? (
           comments.map((comment) => (
-            <div key={comment.id}>
-              <Paragraph>{comment.mail}</Paragraph>
-              <Paragraph>{comment.comment}</Paragraph>
-              <Paragraph>{comment.date.toDateString()}</Paragraph>
-            </div>
+            <CommentsDiv key={comment.id}>
+              <CommentInfoDiv>
+                <Paragraph>User: {comment.mail}</Paragraph>
+                <Paragraph>{comment.comment}</Paragraph>
+                <Paragraph>Day: {comment.date.toDateString()}</Paragraph>
+              </CommentInfoDiv>
+              <>
+                <img src={Trash} alt="" onClick={()=>handleDelete(comment.id)}/>
+              </>
+            </CommentsDiv>
           ))
         ) : (
           <Paragraph>Seja o primeiro a comentar!</Paragraph>

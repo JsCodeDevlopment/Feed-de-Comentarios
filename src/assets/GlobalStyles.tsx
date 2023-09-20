@@ -6,7 +6,7 @@ export const ResetCSS = createGlobalStyle`
     padding: 0;
     border: 0;
     box-sizing: border-box;
-    font-family: Space Grotesk;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-decoration: none;
   }
   html {
@@ -16,5 +16,11 @@ export const ResetCSS = createGlobalStyle`
   html, #root{
     width: 100%;
     height: 100%;
+  }
+
+  img{
+    width: 1.5rem;
+    height: 1.7rem;
+    cursor: pointer;
   }
 `;

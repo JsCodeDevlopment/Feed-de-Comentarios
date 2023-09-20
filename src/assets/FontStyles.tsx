@@ -3,12 +3,12 @@ import styled, { css } from "styled-components";
 export const MainTitle = styled.h1`
 ${()=> css`
     font-size: 2.5rem;
-    color: #b5485f;
+    color: #fff;
 `}
 `
 export const Paragraph = styled.p`
 ${()=> css`
-    font-size: 1.5rem;
-    color: #5a3546;
+    font-size: 1rem;
+    color: #fff;
 `}
 `
