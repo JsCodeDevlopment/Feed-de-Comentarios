@@ -34,6 +34,7 @@ export const CommentsDiv = styled.div`
     width: 27rem;
     gap: 0.8rem;
     align-items: center;
+    place-content: space-between;
   `}
 `;
 export const CommentInfoDiv = styled.div`

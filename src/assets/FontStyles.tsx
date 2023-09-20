@@ -10,5 +10,6 @@ export const Paragraph = styled.p`
 ${()=> css`
     font-size: 1rem;
     color: #fff;
+    word-break: break-all;
 `}
 `

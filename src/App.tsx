@@ -40,7 +40,7 @@ export function App() {
       <MainContainer>
         <MainTitle>Feed de Comentários</MainTitle>
         <form onSubmit={handleSubmit}>
-          <LabelForm htmlFor="email">Email:</LabelForm>
+          <LabelForm htmlFor="email">Email: </LabelForm>
           <input
             id="email"
             type="email"
@@ -48,7 +48,7 @@ export function App() {
             value={mail}
             onChange={(ev) => setMail(ev.target.value)} // vai pegar o evento e atualizar sempre que houver mudança //
           />
-          <LabelForm htmlFor="comment">Comentário:</LabelForm>
+          <LabelForm htmlFor="comment">Comentário: </LabelForm>
           <textarea
             id="comment"
             rows={6}
