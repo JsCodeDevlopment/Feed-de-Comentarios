@@ -1,9 +1,14 @@
 import { ResetCSS } from "./assets/GlobalStyles";
-import { ViewPort, MainContainer, CommentsDiv, CommentInfoDiv } from "./assets/Styles";
+import {
+  ViewPort,
+  MainContainer,
+  CommentsDiv,
+  CommentInfoDiv,
+} from "./assets/Styles";
 import { LabelForm, Button } from "./assets/FormStyles";
 import { MainTitle, Paragraph } from "./assets/FontStyles";
 import Trash from "./assets/Imagens/icon-delete.svg";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 
 interface IComment {
   id: number;
@@ -12,10 +17,29 @@ interface IComment {
   date: Date;
 }
 
+type Comment = {
+  id: number;
+  mail: string;
+  comment: string;
+  date: Date;
+};
+
 export function App() {
   const [mail, setMail] = useState("");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<IComment[]>([]);
+
+  useEffect(() => {
+    const localComments = localStorage.getItem("comments");
+    if (!localComments) return;
+    const arrayComments: Array<Comment> = JSON.parse(localComments);
+    setComments(() =>
+      arrayComments.map((comment) => ({
+        ...comment,
+        date: new Date(comment.date),
+      }))
+    );
+  }, []);
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
@@ -26,13 +50,17 @@ export function App() {
       comment: comment,
       date: new Date(),
     };
-    setComments((state) => [newComment, ...state]);
-    setMail("");
+    const newComments = [...comments, newComment];
+    setComments([...newComments]);
+    localStorage.setItem("comments", JSON.stringify(newComments));
     setComment("");
+    setMail("");
   };
   const handleDelete = (id: number) => {
-    setComments((currentComents)=> currentComents.filter((comment)=>comment.id !== id))
-  }
+    setComments((currentComents) =>
+      currentComents.filter((comment) => comment.id !== id)
+    );
+  };
 
   return (
     <ViewPort>
@@ -70,7 +98,11 @@ export function App() {
                 <Paragraph>Day: {comment.date.toDateString()}</Paragraph>
               </CommentInfoDiv>
               <>
-                <img src={Trash} alt="" onClick={()=>handleDelete(comment.id)}/>
+                <img
+                  src={Trash}
+                  alt=""
+                  onClick={() => handleDelete(comment.id)}
+                />
               </>
             </CommentsDiv>
           ))
