@@ -57,9 +57,10 @@ export function App() {
     setMail("");
   };
   const handleDelete = (id: number) => {
-    setComments((currentComents) =>
-      currentComents.filter((comment) => comment.id !== id)
-    );
+    const updatedComments = comments.filter((comment) => comment.id !== id);
+    localStorage.setItem('comments', JSON.stringify(updatedComments));
+
+    setComments(updatedComments);
   };
 
   return (
