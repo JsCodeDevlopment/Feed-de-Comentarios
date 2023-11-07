@@ -59,7 +59,6 @@ export function App() {
   const handleDelete = (id: number) => {
     const updatedComments = comments.filter((comment) => comment.id !== id);
     localStorage.setItem('comments', JSON.stringify(updatedComments));
-
     setComments(updatedComments);
   };
 
